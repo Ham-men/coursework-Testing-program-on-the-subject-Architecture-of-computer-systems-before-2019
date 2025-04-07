@@ -1,0 +1,264 @@
+unit Unit4;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, Grids, StdCtrls, Menus;
+
+type
+  TForm4 = class(TForm)
+    matr: TStringGrid;
+    Button1: TButton;
+    MainMenu1: TMainMenu;
+    N1: TMenuItem;
+    N2: TMenuItem;
+    Button2: TButton;
+    procedure Button2Click(Sender: TObject);
+    procedure matrDrawCell(Sender: TObject; ACol, ARow: Integer; Rect: TRect;
+      State: TGridDrawState);
+    procedure N2Click(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+    procedure matrSelectCell(Sender: TObject; ACol, ARow: Integer;
+      var CanSelect: Boolean);
+    procedure FormActivate(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form4: TForm4;
+  N,M,mcol,mrow: integer;                     //col-столбик, row-строка
+   t : TStringList;
+   name1,otv:string;
+    file_otv:Textfile;
+    letter:char;
+    vopr_otv: array [1..12, 1..6] of String;        //[номер, ответ]
+    ocenka:string;
+
+implementation
+
+uses Unit1, Unit3, Unit5;
+
+{$R *.dfm}
+
+procedure TForm4.Button1Click(Sender: TObject);
+var
+a,c,i,b,kon:integer;
+
+begin
+AssignFile(file_otv,'test.txt');
+b:=1;
+a:=0;
+ Reset(file_otv);
+name1:=matr.Cells[1,mrow];
+ocenka:=matr.Cells[2,mrow];
+ form3.Close;
+ for  i:=1 to 12 do                                      //работа с 3 формай!!
+ Unit3.numvcl[i]:=1;
+Unit3.otv:=1;
+  Form3.sbros;
+  Form3.shapclear;
+ Unit3.numvopr:=1;
+
+ form5.Close;
+ for  i:=1 to 12 do                                      //работа с 3 формай!!
+ Unit5.numvcl[i]:=1;
+Unit5.otv:=1;
+  Form5.sbros;
+  Form5.shapclear;
+ Unit5.numvopr:=1;
+
+while  a <  t.Count do begin
+     if (mcol=2)and (matr.Cells[mcol,mrow]<>'') then begin
+
+  if (name1=t.Strings[a]) and (t.Strings[a+2]='number1')then begin
+    kon:=a+14;
+     Form3.Label6.Caption:= t.Strings[a+1];
+  for c:=a+3 to kon do begin          //
+    for i := 1 to 6 do begin
+     vopr_otv[b,i]:=Copy(t.Strings[c],i,1);
+     Unit3.numotv[b,i]:=StrToInt(Copy(t.Strings[c],i,1));
+    end;
+    b:=b+1;
+  end;                          //
+  break;
+
+end;
+Form3.pokazotv;
+ Unit3.name2:=name1;
+ Unit3.ocenka:=matr.Cells[mcol,mrow];
+ form3.Show;
+     end
+
+else if (mcol=3)and (matr.Cells[mcol,mrow]<>'') then begin
+
+  if (name1=t.Strings[a]) and (t.Strings[a+2]='number2')then begin
+    kon:=a+14;
+     Form5.Label6.Caption:= t.Strings[a+1];
+  for c:=a+3 to kon do begin          //
+    for i := 1 to 7 do begin
+     vopr_otv[b,i]:=Copy(t.Strings[c],i,1);
+     Unit5.numotv[b,i]:=StrToInt(Copy(t.Strings[c],i,1));
+    end;
+    b:=b+1;
+  end;                          //
+  break;
+
+end;
+Form5.pokazotv;
+ Unit5.name2:=name1;
+ Unit5.ocenka:=matr.Cells[mcol,mrow];
+ form5.Show;
+     end ;
+
+a:=a+1;
+end;
+
+
+ closefile(file_otv);
+end;
+
+procedure TForm4.Button2Click(Sender: TObject);
+var
+a,c,d,i:integer;
+rezult : TModalResult;
+begin
+  a:=1;
+  c:=1;
+  d:=0;
+  name1:=matr.Cells[1,mrow];
+      While (a <t.Count-1) do begin
+    if name1=t.Strings[a] then begin
+      rezult := MessageDlg('Удалить ползователя '+name1+' ?',mtInformation, [mbYes, mbNo], 0);
+   
+   if rezult = mrYes then begin
+       c:=a+15;
+       d:=1;
+       break;
+    end;
+    end;
+    a:=a+16;
+      end;
+        if d=1 then begin
+        for  i:= 0 to 15 do
+      t.Delete(a-1);
+
+
+       end;
+       t.SaveToFile('test.txt');
+       {sleep(4000);
+       form4.Deactivate;
+       form4.Activate;  }
+
+end;
+
+procedure TForm4.FormActivate(Sender: TObject);
+var
+a ,b,c: Integer;
+assessment:Real;
+begin
+t.Free;
+ t := TStringList.Create;
+   t.LoadFromFile('test.txt');
+  // matr.RowHeights[1]:=40;
+
+   N:=Round(t.Count/15);     //ширина и высота   (было 3)
+   M:=3;
+
+   matr.DefaultColWidth:=80;
+   matr.DefaultRowHeight:=50;
+   matr.RowCount:=N;
+   matr.ColCount:=M+1;
+   //matr.Height:=(matr.DefaultRowHeight+20)*(N+1);
+   matr.Width:=(matr.DefaultColWidth+7)*(M+1);
+   matr.Visible:=true;
+
+    a:=0;
+     matr.Cells[1,0]:='ФИО';
+     matr.Cells[2,0]:='Вариант 1';
+     matr.Cells[3,0]:='Вариант 2';
+     b:=1;
+ while a<t.Count do begin
+
+     matr.Cells[0,b]:=t.Strings[a];
+
+       a:=a+1;                            //вставка инфы в матрицу
+     matr.Cells[1,b]:=t.Strings[a];
+
+        a:=a+1;
+         c:= StrToInt(t.Strings[a]);
+         assessment:=c/12*100;
+         if t.Strings[a+1]='number1' then begin
+
+         if(assessment>=80)then
+      matr.Cells[2,b]:='5'
+      else if(assessment>=60)and(assessment<80)then
+      matr.Cells[2,b]:='4'
+      else if(assessment>=40)and(assessment<60)then
+      matr.Cells[2,b]:='3'
+      else if(assessment<40)then
+      matr.Cells[2,b]:='2';
+         end
+         else if t.Strings[a+1]='number2' then begin
+
+         if(assessment>=80)then
+      matr.Cells[3,b]:='5'
+      else if(assessment>=60)and(assessment<80)then
+      matr.Cells[3,b]:='4'
+      else if(assessment>=40)and(assessment<60)then
+      matr.Cells[3,b]:='3'
+      else if(assessment<40)then
+      matr.Cells[3,b]:='2';
+         end;
+        a:=a+1;
+        b:=b+1;
+        a:=a+13;
+
+ end;
+
+end;
+
+procedure TForm4.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+form1.Close;
+end;
+
+
+
+procedure TForm4.matrDrawCell(Sender: TObject; ACol, ARow: Integer; Rect: TRect;
+  State: TGridDrawState);
+var
+  MyRect: TRect;
+  MyText: PChar;
+begin
+  MyText := pChar(matr.Cells[ACol,ARow]);
+
+  MyRect := Rect;
+  matr.Canvas.FillRect(MyRect);
+  InflateRect(MyRect, -2, -2);
+
+  DrawText(matr.Canvas.Handle, MyText, -1, MyRect, DT_WORDBREAK);   
+end;
+
+procedure TForm4.matrSelectCell(Sender: TObject; ACol, ARow: Integer;
+  var CanSelect: Boolean);
+  begin
+  mrow:=arow;
+  mcol:=acol;
+  ocenka:=matr.Cells[2,mrow];
+  
+end;
+
+procedure TForm4.N2Click(Sender: TObject);
+begin
+Hide;
+Unit1.who:=0;
+Form1.Show;
+end;
+
+end.

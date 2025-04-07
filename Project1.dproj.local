@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>1899.12.30 00:00:00.000.pas,C:\Users\Максим\Desktop\Unit3.pas=C:\Максим\курсач делфи\Unit3.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.dfm,C:\Максим\курсач делфи\Unit3.dfm=C:\Users\Максим\Desktop\Unit3.dfm</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.dfm,C:\Users\Максим\Desktop\Unit3.dfm=C:\Максим\курсач делфи\Unit3.dfm</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.pas,C:\Максим\курсач делфи\Unit4.pas=</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.pas,C:\Максим\курсач делфи\Unit5.pas=</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.pas,C:\Максим\курсач делфи\Unit5.pas=C:\Максим\курсач делфи\Unit3.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.pas,C:\Максим\курсач делфи\Unit5.pas=</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.pas,C:\Максим\курсач делфи\Unit1.pas=C:\My Documents\Borland Studio Projects\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.dfm,C:\Максим\курсач делфи\Unit5.dfm=</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.dfm,C:\Максим\курсач делфи\Unit2.dfm=C:\My Documents\Borland Studio Projects\Unit2.dfm</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.dfm,C:\Максим\курсач делфи\Unit4.dfm=</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.pas,C:\Максим\курсач делфи\Unit2.pas=C:\My Documents\Borland Studio Projects\Unit2.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.dfm,C:\Максим\курсач делфи\Unit1.dfm=C:\My Documents\Borland Studio Projects\Unit1.dfm</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.dfm,C:\Максим\курсач делфи\Unit5.dfm=C:\Максим\курсач делфи\Unit3.dfm</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.dfm,C:\Максим\курсач делфи\Unit5.dfm=</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.pas,C:\Максим\курсач делфи\Unit3.pas=C:\Users\Максим\Desktop\Unit3.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.bdsproj,C:\Максим\курсач делфи\Project1.bdsproj=C:\My Documents\Borland Studio Projects\Project1.bdsproj</Transaction>
+  </Transactions>
+</BorlandProject>
